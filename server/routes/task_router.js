@@ -1,20 +1,14 @@
-const { channel } = require('diagnostics_channel');
 const express = require('express');
 const router = express.Router();
 const pg = require('pg');
 
+//DB Connection
 const pool = new pg.Pool({
     database: 'task',        
     host: 'localhost',
     port: 5432
 });
 
-// DB CONNECTION
-pool = new pg.Pool({
-    database: "task",
-    host: 'Localhost',
-    port: 5432,
-});
 // GET
 router.get('/', (req, res) => {
     let sqlQuery = `
