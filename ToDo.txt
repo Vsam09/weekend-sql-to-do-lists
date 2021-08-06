@@ -1,0 +1,39 @@
+[]Create a Database through Postico Named: 'weekend-to-do-app'
+[]Create a Database.sql file
+
+///////////////////////////////////////////////////////////////////////////////
+
+Server side
+[] app.get
+[] app.post
+[] res.send
+[] PORT
+
+///////////////////////////////////////////////////////////////////////////////
+
+Client side
+[] Create 2 buttons for complete and delete inside of append 
+    []render 
+        -empty
+        -table .. TB, TR, TD
+[] Complete button should have a green background on click of complete button
+[] Delete button gets rid of the List task from the front end and database 
+[] app.get $.ajax
+    .then
+    .catch
+[] app.post $.ajax
+    .then
+    .catch
+
+///////////////////////////////////////////////////////////////////////////////
+
+HTML
+[] Create a table that takes in to do List
+
+///////////////////////////////////////////////////////////////////////////////
+
+CSS
+[] Background color
+[] Font and Family size
+[] Text color and/ background color of task -Green background to display Completed!
+
