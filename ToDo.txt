@@ -1,5 +1,6 @@
-[]Create a Database through Postico Named: 'weekend-to-do-app'
-[]Create a Database.sql file
+[x]Create a Database through Postico Named: 'weekend-to-do-app'
+[x]Create a Database.sql file
+[]Create table in Database
 
 ///////////////////////////////////////////////////////////////////////////////
 
