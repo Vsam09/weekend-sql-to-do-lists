@@ -5,9 +5,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 Server side
-[] app.get
-[] app.post
-[] res.send
 [x] PORT
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -17,7 +14,7 @@ Client side
     [x]render 
         -empty
         -table .. TB, TR, TD
-[] Complete button should have a green background on click of complete button
+[x] Complete button should have a green background on click of complete button
 [x] Delete button gets rid of the List task from the front end and database 
 [x] app.get $.ajax
     .then
@@ -36,5 +33,5 @@ HTML
 CSS
 [] Background color
 [] Font and Family size
-[] Text color and/ background color of task -Green background to display Completed!
+[x] Text color and/ background color of task -Green background to display Completed!
 
