@@ -5,4 +5,11 @@
 }
 body{
     margin: 50px;
+    background-color:navajowhite;
+}
+.yellowBackground {
+    background: green !important;
+}
+#redBackground{
+    background: red;
 }
