@@ -2,9 +2,22 @@ $(document).ready(onReady);
 
 function onReady() {
     $('#postBtn').on('click', postTasks)
+    $(document).on('click','.deleteBtn', deleteTask )
     getTaskData();
-}
+};
 
+function deleteTask(){
+    // console.log('Delete Button working..', $(this))
+    // $(this).parent().parent().remove();
+    const taskId = $(this).closest('tr').data('id')
+    $.ajax({
+        type: 'DELETE',
+        url: `/tasks/${taskId}`,
+    }).then(function(res) {
+        console.log(res)
+        getTaskData();
+    })
+};
 // get artist data from the server
 function getTaskData() {
     $("#taskTableBody").empty();
@@ -21,12 +34,12 @@ function getTaskData() {
                     <td>${response[i].date}</td>
 
                     <td><button class="completeBtn">Complete</button></td>
-                    </td><button class="deleteBtn">Delete</button></td>
+                    <td><button class="deleteBtn">Delete</button></td>
                 </tr>
             `);
         }
     });
-}
+};
 function postTasks() {
     let postTask = {
         task: $('#taskInput').val(),
@@ -41,4 +54,4 @@ function postTasks() {
         $('#dateInput').val('')
         getTaskData();
     });
-}
+};

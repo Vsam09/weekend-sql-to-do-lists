@@ -77,8 +77,24 @@ pool.query(sqlQuery, sqlParams)
         res.sendStatus(500);
     })
 });
-//DELETE
+//DELETE from database
+router.delete('/:id', (req, res) => {
+    const idToDelete = req.params.id
 
+    let sqlQuery = `
+        DELETE FROM "tasks"
+        WHERE "id" = $1;
+    `;
+    let sqlParams = [idToDelete]
+    pool.query(sqlQuery, sqlParams)
+        .then((dbRes) => {
+            res.sendStatus(200)
+        })
+        .catch((err) => {
+            console.log('Delete Error', err)
+            res.sendStatus(500)
+        })
+});
 
 
 

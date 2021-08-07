@@ -8,21 +8,21 @@ Server side
 [] app.get
 [] app.post
 [] res.send
-[] PORT
+[x] PORT
 
 ///////////////////////////////////////////////////////////////////////////////
 
 Client side
-[] Create 2 buttons for complete and delete inside of append 
-    []render 
+[x] Create 2 buttons for complete and delete inside of append 
+    [x]render 
         -empty
         -table .. TB, TR, TD
 [] Complete button should have a green background on click of complete button
-[] Delete button gets rid of the List task from the front end and database 
-[] app.get $.ajax
+[x] Delete button gets rid of the List task from the front end and database 
+[x] app.get $.ajax
     .then
     .catch
-[] app.post $.ajax
+[x] app.post $.ajax
     .then
     .catch
 
