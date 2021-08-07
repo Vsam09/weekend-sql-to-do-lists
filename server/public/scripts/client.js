@@ -9,7 +9,8 @@ function onReady() {
 
 //Create button to change background color to yellow
 function generateYellow() {
-    $(this).closest('td').addClass('yellowBackground')
+    console.log(this)
+    $(this).closest('tr').addClass('yellowBackground')
     console.log('WORK')
 }//End yellow button
 
@@ -40,7 +41,7 @@ function getTaskData() {
                     <td>${response[i].task}</td>
                     <td>${response[i].date}</td>
 
-                    <td><button class="yellowBackground class="completeBtn">Complete</button></td>
+                    <td><button class="completeBtn">Complete</button></td>
                     <td><button id="redBackground" class="deleteBtn">Delete</button></td>
                 </tr>
             `);
