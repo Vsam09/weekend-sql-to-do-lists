@@ -4,7 +4,7 @@ const pg = require('pg');
 
 //DB Connection
 const pool = new pg.Pool({
-    database: 'task',        
+    database: 'tasks',        
     host: 'localhost',
     port: 5432
 });
@@ -12,7 +12,7 @@ const pool = new pg.Pool({
 // GET
 router.get('/', (req, res) => {
     let sqlQuery = `
-        SELECT * FROM "task"
+        SELECT * FROM "tasks"
     `;
     pool.query(sqlQuery)
     .then((dbRes) => {
@@ -25,14 +25,44 @@ router.get('/', (req, res) => {
 });
 
 //POST
+router.post('/', (req, res) => {
+    let sqlQuery = `
+        --Add a new task to the DB
+        INSERT INTO "tasks"
+            ("task", "date")
+        VALUES
+            --prevent sql injections 
+           ($1, $2)
+    `;
+    let sqlParams = [
+        req.body.task,  //$1
+        req.body.date   //$2
+        
+    ];
+    console.log('sqlQuery:', sqlQuery);
 
+    //Send the query to the DB
+    pool.query(sqlQuery, sqlParams)
+            .then((dbRes) => {
+                //DB is happy
+                //we're happy
+                //everyone is happy
+                res.sendStatus(201); //201 = created
+            })
+            .catch ((err) => {
+                console.log('POST error', err)
+                res.sendStatus(500);
+            })
+
+});
 //PUT
-router.put('/', (req, res) => {
+router.put('/:id', (req, res) => {
     console.log(req.params.id);
     console.log(req.body.task);
     const sqlQuery = `
-    UPDATE "task"
-    
+    UPDATE "tasks"
+    SET "task" = $1
+    WHERE "id" = $2
 `;
 const sqlParams = [
     req.body.task,          
