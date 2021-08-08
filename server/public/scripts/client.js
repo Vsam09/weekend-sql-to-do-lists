@@ -12,7 +12,7 @@ function generateGreen() {
     console.log(this)
     $(this).closest('tr').addClass('greenBackground')
     console.log('WORK')
-    $(this).hide();
+    $(this).hide('');
     completeTask();
 
 };
