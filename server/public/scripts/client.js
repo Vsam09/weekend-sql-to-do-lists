@@ -10,7 +10,6 @@ function onReady() {
 //Create button to change background color to green
 function generateGreen() {
     // let context = $(this)
-    console.log(this)
     $(this).closest('tr').addClass('greenBackground')
     console.log('WORK')
     $(this).hide('');
@@ -21,19 +20,19 @@ function completeTask() {
     let taskId = $(this).closest('tr').data('id');
     console.log('taskId', taskId)
 
-    // let complete = $(this).closest('tr').data('complete');
-    // console.log('complete', complete)
+    let complete = $(this).closest('tr').data('complete');
+    console.log('complete', complete)
 
-    // if (complete === false || complete === null) {
-    //     complete = true;
-    // }
+    if (complete === false || complete === null) {
+        complete = true;
+    }
     // else if (complete === true || complete === null) {
     //     complete = false;
     // }
     $.ajax({
         type: 'PUT',
         url: `/tasks/${taskId}`,
-        // data: {complete: complete}
+        data: {complete: complete}
     }).then((res) => {
         console.log(res)
         getTaskData();
@@ -74,7 +73,6 @@ function getTaskData() {
 function postTasks() {
     let postTask = {
         task: $('#taskInput').val(),
-        complete: false
     }
     $.ajax({
         type: 'POST',
