@@ -1,5 +1,5 @@
 CREATE TABLE "tasks" (
-	id SERIAL,
+	id SERIAL PRIMARY KEY,
 	task varchar(1000),
 	complete BOOLEAN DEFAULT FALSE
 );

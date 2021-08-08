@@ -55,14 +55,12 @@ router.post('/', (req, res) => {
 //PUT
 router.put('/:id', (req, res) => {
     console.log(req.params.id);
-    console.log(req.body.complete);
     const sqlQuery = `
     UPDATE "tasks"
-    SET "complete" = $1
-    WHERE "id" = $2;
+    SET "complete" = true
+    WHERE "id" = $1;
 `;
-const sqlParams = [
-    req.body.complete,         
+const sqlParams = [     
     req.params.id           
 ];
 pool.query(sqlQuery, sqlParams)

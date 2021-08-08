@@ -15,31 +15,28 @@ function generateGreen() {
     console.log('WORK')
     $(this).hide('');
     completeTask();
-
 };
 
-function completeTask( ) {
+function completeTask() {
     let taskId = $(this).closest('tr').data('id');
     console.log('taskId', taskId)
 
-    let complete = $(this).closest('tr').data('complete');
-    console.log('complete', complete)
+    // let complete = $(this).closest('tr').data('complete');
+    // console.log('complete', complete)
 
-    if (complete === false || complete === null) {
-        complete = true;
-    }
-    else if (complete === true || complete === null) {
-        complete = false;
-    }
+    // if (complete === false || complete === null) {
+    //     complete = true;
+    // }
+    // else if (complete === true || complete === null) {
+    //     complete = false;
+    // }
     $.ajax({
         type: 'PUT',
         url: `/tasks/${taskId}`,
-        data: {complete: complete}
-    }).then(function(res) {
+        // data: {complete: complete}
+    }).then((res) => {
         console.log(res)
         getTaskData();
-    }).catch((err) => {
-        console.log('PUT Error', err)
     })
 };
 
@@ -63,8 +60,9 @@ function getTaskData() {
         console.log("Get Task", response);
         // append data to the DOM
         for (let i = 0; i < response.length; i++) {
+            console.log('append', response)
             $('#taskTableBody').append(`
-                <tr id="greenBackground" class= "grayBackground" data-id="${response[i].id}">
+                <tr id="greenBackground" class= "grayBackground" data-complete="${response[i].complete}" data-id="${response[i].id}">
                     <td>${response[i].task}</td>
                     <td><button id="completeInput" class="completeBtn">Complete</button></td>
                     <td><button id="redBackground" class="deleteBtn">Delete</button></td>
@@ -76,17 +74,15 @@ function getTaskData() {
 function postTasks() {
     let postTask = {
         task: $('#taskInput').val(),
-        date: $('#dateInput').val(),
-        complete: $('#completeInput').val()
+        complete: false
     }
     $.ajax({
         type: 'POST',
         url: '/tasks',
         data: postTask
     }).then( function (response) {
-        $('#taskInput').val(''),
-        $('#dateInput').val(''),
-        $('#completeInput').val('')
+        console.log('Response', response)
         getTaskData();
+        $('#taskInput').val('')
     });
 };

@@ -12,10 +12,6 @@ app.use(express.static('server/public'));
 app.use('/tasks', router);
 
 
-//Lets grab the good stuff
-
-
-
 app.listen(PORT, () => {
     console.log('up and running on port', PORT);
 });
