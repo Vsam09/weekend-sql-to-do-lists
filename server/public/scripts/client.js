@@ -17,26 +17,26 @@ function generateGreen() {
 };
 
 function completeTask() {
-    let taskId = $(this).closest('tr').data('id');
-    console.log('taskId', taskId)
+    let id = $(this).closest('tr').data('id');
+    console.log('Id', id)
 
-    let complete = $(this).closest('tr').data('complete');
-    console.log('complete', complete)
+    // let complete = $(this).closest('tr').data('complete');
+    // console.log('complete', complete)
 
-    if (complete === false || complete === null) {
-        complete = true;
-    }
-    // else if (complete === true || complete === null) {
-    //     complete = false;
+    // if (complete === false || complete === null) {
+    //     complete = true;
     // }
+   
     $.ajax({
         type: 'PUT',
-        url: `/tasks/${taskId}`,
-        data: {complete: complete}
+        url: `/tasks/${id}`
+        // data: {complete: complete}
     }).then((res) => {
         console.log(res)
         getTaskData();
-    })
+    }).catch((err) => {
+        console.log('error in PUT', err);
+    });
 };
 
 function deleteTask(){
@@ -44,10 +44,12 @@ function deleteTask(){
     $.ajax({
         type: 'DELETE',
         url: `/tasks/${taskId}`,
-    }).then(function(res) {
+    }).then((res) => {
         console.log(res)
         getTaskData();
-    })
+    }).catch((err) => {
+        console.log('error in DELETE', err);
+    });
 };
 // get task data from the server
 function getTaskData() {
@@ -55,19 +57,21 @@ function getTaskData() {
     $.ajax({
         type: 'GET',
         url: '/tasks'
-    }).then(function (response) {
-        console.log("Get Task", response);
+    }).then((res) => {
+        console.log("Get Task", res);
         // append data to the DOM
-        for (let i = 0; i < response.length; i++) {
-            console.log('append', response)
+        for (let i = 0; i < res.length; i++) {
+            console.log('append', res)
             $('#taskTableBody').append(`
-                <tr id="greenBackground" class= "grayBackground" data-complete="${response[i].complete}" data-id="${response[i].id}">
-                    <td>${response[i].task}</td>
+                <tr id="greenBackground" class= "grayBackground" data-complete="${res[i].complete}" data-id="${res[i].id}">
+                    <td>${res[i].task}</td>
                     <td><button id="completeInput" class="completeBtn">Complete</button></td>
                     <td><button id="redBackground" class="deleteBtn">Delete</button></td>
                 </tr>
             `);
         }
+    }).catch((err) => {
+        console.log('error in GET', err);
     });
 };
 function postTasks() {
@@ -78,9 +82,11 @@ function postTasks() {
         type: 'POST',
         url: '/tasks',
         data: postTask
-    }).then( function (response) {
-        console.log('Response', response)
+    }).then((res) => {
+        console.log('Response', res)
         getTaskData();
         $('#taskInput').val('')
+    }).catch((err) => {
+        console.log('error in POST', err);
     });
 };
