@@ -31,7 +31,7 @@ HTML
 ///////////////////////////////////////////////////////////////////////////////
 
 CSS
-[] Background color
+[x] Background color
 [] Font and Family size
 [x] Text color and/ background color of task -Green background to display Completed!
 

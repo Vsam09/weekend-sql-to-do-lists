@@ -3,20 +3,30 @@ $(document).ready(onReady);
 function onReady() {
     $('#postBtn').on('click', postTasks)
     $(document).on('click','.deleteBtn', deleteTask )
-    $(document).on('click','.completeBtn', generateYellow)
+    $(document).on('click','.completeBtn', generateGreen)
     getTaskData();
 };
 
-//Create button to change background color to yellow
-function generateYellow() {
+//Create button to change background color to green
+function generateGreen() {
     console.log(this)
-    $(this).closest('tr').addClass('yellowBackground')
+    $(this).closest('tr').addClass('greenBackground')
     console.log('WORK')
-}//End yellow button
+    let complete = $(this).data('complete')
+        if ( complete === complete)
+            console.log('true', complete)
+        else{
+            console.log('false')
+        }
+    $.ajax({
+        type: 'BOOLEAN',
+        url: '/tasks'
+    }).then(function(res) {
+        console.log(res)
+    })
+};
 
 function deleteTask(){
-    // console.log('Delete Button working..', $(this))
-    // $(this).parent().parent().remove();
     const taskId = $(this).closest('tr').data('id')
     $.ajax({
         type: 'DELETE',
@@ -26,7 +36,7 @@ function deleteTask(){
         getTaskData();
     })
 };
-// get artist data from the server
+// get task data from the server
 function getTaskData() {
     $("#taskTableBody").empty();
     $.ajax({
@@ -37,7 +47,7 @@ function getTaskData() {
         // append data to the DOM
         for (let i = 0; i < response.length; i++) {
             $('#taskTableBody').append(`
-                <tr id="yellowBackground" data-id="${response[i].id}">
+                <tr id="greenBackground" data-id="${response[i].id}">
                     <td>${response[i].task}</td>
                     <td>${response[i].date}</td>
 
