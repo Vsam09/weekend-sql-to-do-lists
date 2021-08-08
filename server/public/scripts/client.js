@@ -9,6 +9,7 @@ function onReady() {
 
 //Create button to change background color to green
 function generateGreen() {
+    // let context = $(this)
     console.log(this)
     $(this).closest('tr').addClass('greenBackground')
     console.log('WORK')
@@ -17,9 +18,13 @@ function generateGreen() {
 
 };
 
-function completeTask () {
+function completeTask( ) {
     let taskId = $(this).closest('tr').data('id');
+    console.log('taskId', taskId)
+
     let complete = $(this).closest('tr').data('complete');
+    console.log('complete', complete)
+
     if (complete === false || complete === null) {
         complete = true;
     }
@@ -61,7 +66,6 @@ function getTaskData() {
             $('#taskTableBody').append(`
                 <tr id="greenBackground" class= "grayBackground" data-id="${response[i].id}">
                     <td>${response[i].task}</td>
-
                     <td><button id="completeInput" class="completeBtn">Complete</button></td>
                     <td><button id="redBackground" class="deleteBtn">Delete</button></td>
                 </tr>
