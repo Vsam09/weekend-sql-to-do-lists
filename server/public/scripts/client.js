@@ -12,6 +12,7 @@ function generateGreen() {
     console.log(this)
     $(this).closest('tr').addClass('greenBackground')
     console.log('WORK')
+    $(this).hide();
     completeTask();
 
 };
@@ -25,7 +26,6 @@ function completeTask () {
     else if (complete === true || complete === null) {
         complete = false;
     }
-    
     $.ajax({
         type: 'PUT',
         url: `/tasks/${taskId}`,

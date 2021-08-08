@@ -29,14 +29,14 @@ router.post('/', (req, res) => {
     let sqlQuery = `
         --Add a new task to the DB
         INSERT INTO "tasks"
-            ("task", "complete")
+            ("task")
         VALUES
             --prevent sql injections 
-           ($1, $2)
+           ($1)
     `;
     let sqlParams = [
         req.body.task,  //$1
-        req.body.complete //$2
+        // req.body.complete //$2
         
     ];
     console.log('sqlQuery:', sqlQuery);
@@ -56,27 +56,27 @@ router.post('/', (req, res) => {
 
 });
 //PUT
-router.put('/:id', (req, res) => {
-    console.log(req.params.id);
-    console.log(req.body.task);
-    const sqlQuery = `
-    UPDATE "tasks"
-    SET "complete" = 'true';
-    WHERE "id" = $1;
-`;
-const sqlParams = [
-    req.body.task,          
-    req.params.id           
-];
-pool.query(sqlQuery, sqlParams)
-    .then((dbRes) => {
-        res.sendStatus(200);
-    })
-    .catch((err) => {
-        console.log('UPDATE err', err);
-        res.sendStatus(500);
-    })
-});
+// router.put('/:id', (req, res) => {
+//     console.log(req.params.id);
+//     console.log(req.body.task);
+//     const sqlQuery = `
+//     UPDATE "tasks"
+//     SET "complete" = 'true'
+//     WHERE "id" = $1;
+// `;
+// const sqlParams = [
+//     req.body.task,          
+//     req.params.id           
+// ];
+// pool.query(sqlQuery, sqlParams)
+//     .then((dbRes) => {
+//         res.sendStatus(200);
+//     })
+//     .catch((err) => {
+//         console.log('UPDATE err', err);
+//         res.sendStatus(500);
+//     })
+// });
 //DELETE from database
 router.delete('/:id', (req, res) => {
     const idToDelete = req.params.id

@@ -16,6 +16,6 @@ body{
 .completeBtn{
     background: yellow;
 }
-.redBackground{
-    background: gray;
+.grayBackground{
+    background: lightgray;
 }
