@@ -29,14 +29,14 @@ router.post('/', (req, res) => {
     let sqlQuery = `
         --Add a new task to the DB
         INSERT INTO "tasks"
-            ("task", "date")
+            ("task", "complete")
         VALUES
             --prevent sql injections 
            ($1, $2)
     `;
     let sqlParams = [
         req.body.task,  //$1
-        req.body.date   //$2
+        req.body.complete //$2
         
     ];
     console.log('sqlQuery:', sqlQuery);
@@ -61,8 +61,8 @@ router.put('/:id', (req, res) => {
     console.log(req.body.task);
     const sqlQuery = `
     UPDATE "tasks"
-    SET "task" = $1
-    WHERE "id" = $2
+    SET "complete" = 'true';
+    WHERE "id" = $1;
 `;
 const sqlParams = [
     req.body.task,          

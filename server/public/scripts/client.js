@@ -12,17 +12,29 @@ function generateGreen() {
     console.log(this)
     $(this).closest('tr').addClass('greenBackground')
     console.log('WORK')
-    let complete = $(this).data('complete')
-        if ( complete === complete)
-            console.log('true', complete)
-        else{
-            console.log('false')
-        }
+    completeTask();
+
+};
+
+function completeTask () {
+    let taskId = $(this).closest('tr').data('id');
+    let complete = $(this).closest('tr').data('complete');
+    if (complete === false || complete === null) {
+        complete = true;
+    }
+    else if (complete === true || complete === null) {
+        complete = false;
+    }
+    
     $.ajax({
-        type: 'BOOLEAN',
-        url: '/tasks'
+        type: 'PUT',
+        url: `/tasks/${taskId}`,
+        data: {complete: complete}
     }).then(function(res) {
         console.log(res)
+        getTaskData();
+    }).catch((err) => {
+        console.log('PUT Error', err)
     })
 };
 
@@ -47,11 +59,10 @@ function getTaskData() {
         // append data to the DOM
         for (let i = 0; i < response.length; i++) {
             $('#taskTableBody').append(`
-                <tr id="greenBackground" data-id="${response[i].id}">
+                <tr id="greenBackground" class= "grayBackground" data-id="${response[i].id}">
                     <td>${response[i].task}</td>
-                    <td>${response[i].date}</td>
 
-                    <td><button class="completeBtn">Complete</button></td>
+                    <td><button id="completeInput" class="completeBtn">Complete</button></td>
                     <td><button id="redBackground" class="deleteBtn">Delete</button></td>
                 </tr>
             `);
@@ -62,6 +73,7 @@ function postTasks() {
     let postTask = {
         task: $('#taskInput').val(),
         date: $('#dateInput').val(),
+        complete: $('#completeInput').val()
     }
     $.ajax({
         type: 'POST',
@@ -69,7 +81,8 @@ function postTasks() {
         data: postTask
     }).then( function (response) {
         $('#taskInput').val(''),
-        $('#dateInput').val('')
+        $('#dateInput').val(''),
+        $('#completeInput').val('')
         getTaskData();
     });
 };

@@ -1,9 +1,9 @@
 CREATE TABLE "tasks" (
 	id SERIAL,
 	task varchar(1000),
-	date date
+	complete BOOLEAN DEFAULT FALSE
 );
 INSERT INTO "tasks"
-("task", "date")
+("task", "complete")
 VALUES
-('Go Fishing', '05-31-2022');
+('Go Fishing', 'False');
