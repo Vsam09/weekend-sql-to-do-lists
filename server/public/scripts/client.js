@@ -9,28 +9,29 @@ function onReady() {
 
 //Create button to change background color to green
 function generateGreen() {
-    // let context = $(this)
+    let context = $(this);
     $(this).closest('tr').addClass('greenBackground')
     console.log('WORK')
     $(this).hide('');
-    completeTask();
+    completeTask(context);
+    
 };
 
-function completeTask() {
-    let id = $(this).closest('tr').data('id');
+function completeTask( animal) {
+    let id = animal.closest('tr').data('id');
     console.log('Id', id)
 
-    // let complete = $(this).closest('tr').data('complete');
-    // console.log('complete', complete)
+    let complete = animal.closest('tr').data('complete');
+    console.log('complete', complete)
 
-    // if (complete === false || complete === null) {
-    //     complete = true;
-    // }
+    if (complete === false || complete === null) {
+        complete = true;
+    }
    
     $.ajax({
         type: 'PUT',
-        url: `/tasks/${id}`
-        // data: {complete: complete}
+        url: `/tasks/${complete}`,
+        data: {complete: complete}
     }).then((res) => {
         console.log(res)
         getTaskData();

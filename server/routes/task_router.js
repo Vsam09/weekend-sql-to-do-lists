@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
     `;
     let sqlParams = [
         req.body.task,  //$1
-        // req.params.complete //$2
+        req.body.complete //$2
         
     ];
     console.log('sqlQuery:', sqlQuery);
@@ -44,6 +44,7 @@ router.post('/', (req, res) => {
     //Send the query to the DB
     pool.query(sqlQuery, sqlParams)
             .then((dbRes) => {
+                console.log(dbRes)
                 res.sendStatus(201); //201 = created
             })
             .catch ((err) => {
@@ -53,16 +54,16 @@ router.post('/', (req, res) => {
 
 });
 //PUT
-router.put('/:id', (req, res) => {
+router.put('/:complete', (req, res) => {
     console.log(req.params.id);
     console.log(req.body.complete);
     const sqlQuery = `
     UPDATE "tasks"
     SET "complete" = $1
-    WHERE "id" = $2;
+    WHERE "id" = $2
 `;
 const sqlParams = [     
-    req.params.id ,    
+    req.params.id,    
     req.body.complete      
 ];
 pool.query(sqlQuery, sqlParams)
